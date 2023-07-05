@@ -1,0 +1,9 @@
+.container{
+    padding: 1rem;
+    width: 100vw;
+    height: 100vh;
+}
+
+tr {
+    line-height: 3rem;
+}
