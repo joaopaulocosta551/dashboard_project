@@ -1,24 +1,22 @@
+import { BreadCrumbModel } from "@/models/breadcrumb.model";
 import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbSeparator,
 } from "@chakra-ui/react";
+import Link from "next/link";
 
-export const BreadCrumb = () => {
+export const BreadCrumb = (props: { segments: BreadCrumbModel[] }) => {
+  const segments = props.segments ?? [];
+
   return (
-    <Breadcrumb>
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/">Home</BreadcrumbLink>
-      </BreadcrumbItem>
-
-      <BreadcrumbItem>
-        <BreadcrumbLink href="/list">List</BreadcrumbLink>
-      </BreadcrumbItem>
-
-      <BreadcrumbItem isCurrentPage>
-        <BreadcrumbLink href="/add">New user</BreadcrumbLink>
-      </BreadcrumbItem>
+    <Breadcrumb style={{ marginBottom: "0.5rem" }}>
+      {segments.map((segment) => (
+        <BreadcrumbItem key={segment.id} isCurrentPage={segment.isCurrent}>
+          <BreadcrumbLink  href={segment.url} as={segment.isCurrent ? undefined : Link}>{segment.name}</BreadcrumbLink>
+        </BreadcrumbItem>
+      ))}
     </Breadcrumb>
   );
 };
